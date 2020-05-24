@@ -1,22 +1,31 @@
-<form [formGroup]="form" fxlayout="column">
-  <mat-card-title>
-    Login
-  </mat-card-title>
-  <p>
-    <mat-form-field appearance="outline">
-      <mat-label>Usuario</mat-label>
-      <input matInput placeholder="User" formControlName="user">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input matInput placeholder="Password" formControlName="password"
-             type="password">
-    </mat-form-field>
-  </p>
-    <button mat-raised-button color="primary"
-            (click)="login()">Login
-    </button>
-</form>
-<mat-divider></mat-divider>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-card>
+    <form [formGroup]="form" fxLayout="column"
+          fxLayoutAlign="center center">
+      <mat-card-title>
+        Login
+      </mat-card-title>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput placeholder="User" formControlName="user">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password" formControlName="password"
+                 type="password">
+        </mat-form-field>
+      </p>
+      <button mat-raised-button color="primary"
+              [disabled]="hayErrores()"
+              (click)="login()">Login
+      </button>
+      <app-alert></app-alert>
+    </form>
+    <mat-divider></mat-divider>
+    <a routerLink="/registro">Registrarse</a>
+  </mat-card>
+</div>
+

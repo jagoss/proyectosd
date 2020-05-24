@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {NavigationStart, Router} from '@angular/router';
-import {AlertService} from '../services/alert.service';
+import {AlertService} from '../servicios/alert.service';
 import {Alert, AlertType} from '../entities/alert';
 import {Subscription} from 'rxjs';
 
@@ -12,7 +12,6 @@ export class AlertComponent implements OnInit, OnDestroy {
   @Input() id = 'default-alert';
   @Input() fade = true;
   alerts: Alert[] = [];
-  alert: Alert = null;
   alertSubscription: Subscription;
   routeSubscription: Subscription;
 

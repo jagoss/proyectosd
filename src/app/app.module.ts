@@ -14,12 +14,17 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
+import {FlexModule} from '@angular/flex-layout';
+import { RegistroComponent } from './registro/registro.component';
+import {AlertComponent} from './alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomepageComponent,
+    RegistroComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatCardModule,
     MatInputModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    FlexModule
   ],
   exports: [
     BrowserAnimationsModule,

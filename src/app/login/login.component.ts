@@ -45,9 +45,17 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('/homepage');
           },
           error => {
+            this.alertService.clear();
             this.alertService.error('Usuario o password no existe!');
           }
         );
     }
+  }
+
+  hayErrores(): boolean {
+    return (this.c.user.errors !== null &&
+      this.c.user.errors.required) ||
+      (this.c.password.errors !== null &&
+      this.c.password.errors.required);
   }
 }
