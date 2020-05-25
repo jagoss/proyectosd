@@ -1,10 +1,10 @@
-<div fxLayout="row" fxLayoutAlign="center center">
+<div class="col-md-6 offset-md-3 mt-5">
   <mat-card>
     <form [formGroup]="form" fxLayout="column"
           fxLayoutAlign="center center">
-      <mat-card-title>
-        Login
-      </mat-card-title>
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Usuario</mat-label>
@@ -18,10 +18,14 @@
                  type="password">
         </mat-form-field>
       </p>
-      <button mat-raised-button color="primary"
-              [disabled]="hayErrores()"
-              (click)="login()">Login
-      </button>
+      <p>
+        <button *ngIf="!loading" mat-raised-button color="primary"
+                [disabled]="form.invalid"
+                (click)="login()">
+          Login
+        </button>
+        <mat-spinner *ngIf="loading"></mat-spinner>
+      </p>
       <app-alert></app-alert>
     </form>
     <mat-divider></mat-divider>

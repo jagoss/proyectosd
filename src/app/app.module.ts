@@ -17,6 +17,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {FlexModule} from '@angular/flex-layout';
 import { RegistroComponent } from './registro/registro.component';
 import {AlertComponent} from './alert/alert.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -26,20 +27,21 @@ import {AlertComponent} from './alert/alert.component';
     RegistroComponent,
     AlertComponent,
   ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot([]),
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDividerModule,
-    FlexModule
-  ],
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot([]),
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatCardModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDividerModule,
+        FlexModule,
+        MatProgressSpinnerModule
+    ],
   exports: [
     BrowserAnimationsModule,
     MatFormFieldModule

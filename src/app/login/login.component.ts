@@ -13,6 +13,8 @@ import {AlertService} from '../servicios/alert.service';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  loading = false;
+  submitted = false;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -35,8 +37,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.submitted = true;
     const val = this.form.value;
 
+    this.loading = true;
     if (val.user && val.password) {
       this.authService.login(val.user, val.password)
         .pipe(first())
@@ -45,6 +49,7 @@ export class LoginComponent implements OnInit {
             this.router.navigateByUrl('/homepage');
           },
           error => {
+            this.loading = false;
             this.alertService.clear();
             this.alertService.error('Usuario o password no existe!');
           }
