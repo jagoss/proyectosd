@@ -18,6 +18,10 @@ import {FlexModule} from '@angular/flex-layout';
 import { RegistroComponent } from './registro/registro.component';
 import {AlertComponent} from './alert/alert.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { NavbarComponent } from './navbar/navbar.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -26,22 +30,26 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     HomepageComponent,
     RegistroComponent,
     AlertComponent,
+    NavbarComponent,
   ],
-    imports: [
-        BrowserModule,
-        RouterModule.forRoot([]),
-        AppRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatFormFieldModule,
-        MatCardModule,
-        MatInputModule,
-        MatButtonModule,
-        MatDividerModule,
-        FlexModule,
-        MatProgressSpinnerModule
-    ],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot([]),
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDividerModule,
+    FlexModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule
+  ],
   exports: [
     BrowserAnimationsModule,
     MatFormFieldModule
