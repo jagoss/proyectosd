@@ -1,0 +1,8 @@
+.mat-encender {
+  background-color: green;
+  color: #fff;
+}
+
+.is-active {
+  color: red;
+}
