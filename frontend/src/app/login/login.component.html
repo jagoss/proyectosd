@@ -1,0 +1,35 @@
+<div class="col-md-6 offset-md-3 mt-5">
+  <mat-card>
+    <form [formGroup]="form" fxLayout="column"
+          fxLayoutAlign="center center">
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput placeholder="User" formControlName="user">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password" formControlName="password"
+                 type="password">
+        </mat-form-field>
+      </p>
+      <p>
+        <button *ngIf="!loading" mat-raised-button color="primary"
+                [disabled]="form.invalid"
+                (click)="login()">
+          Login
+        </button>
+        <mat-spinner *ngIf="loading"></mat-spinner>
+      </p>
+      <app-alert></app-alert>
+    </form>
+    <mat-divider></mat-divider>
+    <a routerLink="/registro">Registrarse</a>
+  </mat-card>
+</div>
+
