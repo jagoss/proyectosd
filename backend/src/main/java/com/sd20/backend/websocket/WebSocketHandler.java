@@ -23,20 +23,24 @@ public class WebSocketHandler extends AbstractWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
         String m = message.toString();
         // message es del tipo "tipo;data"
-        // STATUS;estadoLamparita;estadoDimmer;calorDeTermofon
+        // STATUS;LIGHT;estadoLamparita;DIMMER;estadoDimmer;TERMOMETRO;calorDeTermofon
         // INFO;name;LIGHT;DIMMER;TERMOMETRO
         // ORDER:
         // servidor manda ORDER;extension;value
-        // gadget manda ORDER;success/failure
+        // gadget manda ORDER;success/failure NO IMPLEMENTADO AUN o usado
         String[] parts = m.split(";");
         // pongo switch por si luego el gadget puede mandar mas mensajes
         // como por ejemplo "error llevando a cabo orden" o algo asi
         switch (parts[0]) {
             case Consts.INFO:
+                System.out.println("entra info "+parts);
                 iot.addData(session, parts);
                 break;
             case Consts.ORDER:
                 iot.updateRequestSuccessOrFailure(session, parts);
+                break;
+            case Consts.STATUS:
+                iot.updateStatus(session, parts);
                 break;
             default:
                 throw new IOException("Gadget sent invalid message");
@@ -55,7 +59,7 @@ public class WebSocketHandler extends AbstractWebSocketHandler {
         System.out.println("conectado: "+session.toString());
         // tengo la sesion, pero no se nada del arduino
         // le pregunto por sus datos
-        session.sendMessage(new TextMessage(Consts.INFO));
         iot.add(session);
+        session.sendMessage(new TextMessage(Consts.INFO));
     }
 }

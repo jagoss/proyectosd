@@ -49,6 +49,7 @@ public class IOTService {
                 g.addExtension(parts[i]);
             }
         }
+        System.out.println("termina conf " + g);
     }
 
     public boolean sendOrder(Request req) {
@@ -71,6 +72,7 @@ public class IOTService {
     }
 
 
+
     public void updateRequestSuccessOrFailure(WebSocketSession session, String[] parts) {
         Gadget g = gadgets.get(session.getId());
         if (parts[1].equals(Consts.SUCCESS)) {
@@ -85,4 +87,12 @@ public class IOTService {
                 .filter(gadget -> gadget.getName() != null).collect(toList());
     }
 
+    public void updateStatus(WebSocketSession session, String[] parts) {
+        Gadget g = gadgets.get(session.getId());
+        try {
+            g.updateStatus(parts);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
