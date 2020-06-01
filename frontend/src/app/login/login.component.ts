@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
               private authService: AuthService,
               private router: Router,
               private alertService: AlertService) {
-    if (this.authService.currentUserValue) {
+    if (authService.currentUserValue) {
       this.router.navigate(['/homepage']);
     }
   }
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+	console.log("loegueo");
     this.submitted = true;
     const val = this.form.value;
 
