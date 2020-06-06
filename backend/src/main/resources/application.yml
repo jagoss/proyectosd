@@ -1,3 +1,5 @@
+server:
+  port: 8081
 spring:
   jpa:
     hibernate:
@@ -7,6 +9,6 @@ spring:
         dialect: org.hibernate.dialect.MySQL55Dialect
   datasource:
     url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/domoticasd?serverTimezone=UTC
-    username: franri
-    password: root
+    username: root
+    password:
     driverclassname: com.mysql.cj.jdbc.Driver

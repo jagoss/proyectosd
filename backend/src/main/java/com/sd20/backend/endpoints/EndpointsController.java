@@ -9,6 +9,6 @@ public class EndpointsController {
     @RequestMapping("hello")
     public String helloWorld(@RequestParam(value="name", defaultValue="World") String name) {
         System.out.println("hola");
-        return "Hello "+name+"!!";
+        return "Hello " + name + "!!";
     }
 }
