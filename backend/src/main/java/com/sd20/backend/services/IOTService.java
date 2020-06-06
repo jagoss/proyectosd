@@ -82,6 +82,12 @@ public class IOTService {
         }
     }
 
+    public Request getLastRequestOfGadget(String deviceName){
+        Gadget g = gadgets.get(sessionNameMap.get(deviceName));
+        return g.getLastRequest();
+
+    }
+
     public List<Gadget> getCurrentGadgets() {
         return gadgets.values().stream()
                 .filter(gadget -> gadget.getName() != null).collect(toList());

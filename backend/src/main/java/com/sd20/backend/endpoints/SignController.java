@@ -17,17 +17,18 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
+@RequestMapping("user")
 public class SignController {
 
     @Autowired
     UserRepo userRepo;
 
-    @PostMapping("signup")
+    @PostMapping("/signup")
     public void signup(@RequestBody User userIn){
         // TODO hacer signup para nuevos usuarios, por ahora los metemos a mano
     }
 
-    @PostMapping("signin")
+    @PostMapping("/signin")
     public ResponseEntity<User> signin(@RequestBody User userIn) {
         User user = null;
         if ((user = userRepo.findByUserAndPassword(userIn.getUser(), userIn.getPassword())) == null) {
