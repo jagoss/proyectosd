@@ -11,6 +11,7 @@ import org.springframework.web.socket.handler.AbstractWebSocketHandler;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 
 public class WebSocketHandler extends AbstractWebSocketHandler {
@@ -33,7 +34,7 @@ public class WebSocketHandler extends AbstractWebSocketHandler {
         // como por ejemplo "error llevando a cabo orden" o algo asi
         switch (parts[0]) {
             case Consts.INFO:
-                System.out.println("entra info "+parts);
+                System.out.println("entra info " + Arrays.toString(parts));
                 iot.addData(session, parts);
                 break;
             case Consts.ORDER:
@@ -49,14 +50,14 @@ public class WebSocketHandler extends AbstractWebSocketHandler {
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus){
-        System.out.println("desconectado: "+session.toString());
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) {
+        System.out.println("desconectado: " + session.toString());
         iot.remove(session);
     }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println("conectado: "+session.toString());
+        System.out.println("conectado: " + session.toString());
         // tengo la sesion, pero no se nada del arduino
         // le pregunto por sus datos
         iot.add(session);

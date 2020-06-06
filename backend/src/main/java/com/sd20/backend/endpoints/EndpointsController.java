@@ -19,7 +19,7 @@ public class EndpointsController {
 
     final long MAX_WAIT = 500; //medio segundo
 
-    @PostMapping("/order")
+    @PatchMapping("/order")
     public ResponseEntity<List<Gadget>> sendOrder(@RequestBody Request req) {
         iot.sendOrder(req);
         long start = System.nanoTime();
