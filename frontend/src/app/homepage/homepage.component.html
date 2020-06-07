@@ -2,17 +2,15 @@
 
 
 <mat-action-list>
-  <mat-list-item *ngFor="let light of lightList" (click)="actualizarDispositivo(light)"
-                 [routerLinkActive]="['is-active']"
-                 [ngStyle]="{'background-color': light.bgColor}">
-    <div>
+  <div *ngFor="let disp of dispList">
+    {{disp.deviceName}}
+    <mat-list-item *ngFor="let ex of disp.ext" (click)="actualizarDispositivo(disp, 'TOGGLE')"
+                   [routerLinkActive]="['is-active']"
+                   [ngStyle]="{'background-color': ex[1]==='ON'?verdeHexa:carmesiHexa}">
       <div>
-        <mat-icon *ngIf="light.conectado && light.encendido">mood</mat-icon>
-        <mat-icon *ngIf="!light.conectado || !light.encendido">mood_bad</mat-icon>
+          <mat-icon *ngIf="ex[1]==='ON'">mood</mat-icon>
+          <mat-icon *ngIf="ex[1]==='OFF'">mood_bad</mat-icon>
       </div>
-      <div>
-        {{light.name}}
-      </div>
-    </div>
-  </mat-list-item>
+    </mat-list-item>
+  </div>
 </mat-action-list>

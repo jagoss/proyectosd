@@ -4,6 +4,7 @@ import com.sd20.backend.utils.Consts;
 import com.sd20.backend.utils.Gadget;
 import com.sd20.backend.utils.Request;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
@@ -32,6 +33,10 @@ public class IOTService {
     AbstractMap<String, Gadget> gadgets = new ConcurrentHashMap<String, Gadget>();
     AbstractMap<String, String> sessionNameMap = new ConcurrentHashMap<String, String>();
 
+    public  IOTService(){
+        System.out.println("CREO IOT IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+    }
+
     public void remove(WebSocketSession session) {
         gadgets.remove(session.getId());
         sessionNameMap.remove(session.getId());
@@ -53,6 +58,7 @@ public class IOTService {
     }
 
     public boolean sendOrder(Request req) {
+        System.out.println("sending order");
         Gadget g = null;
         try{
             g = gadgets.get(sessionNameMap.get(req.getDeviceName()));
@@ -74,6 +80,7 @@ public class IOTService {
 
 
     public void updateRequestSuccessOrFailure(WebSocketSession session, String[] parts) {
+        System.out.println("receiving update");
         Gadget g = gadgets.get(session.getId());
         if (parts[1].equals(Consts.SUCCESS)) {
             g.setSuccess(true); g.setLastRequest(null);
@@ -89,8 +96,11 @@ public class IOTService {
     }
 
     public List<Gadget> getCurrentGadgets() {
-        return gadgets.values().stream()
+        List<Gadget> l =  gadgets.values().stream()
                 .filter(gadget -> gadget.getName() != null).collect(toList());
+        System.out.println("antes de enviar gadgets");
+        System.out.println(l);
+        return l;
     }
 
     public void updateStatus(WebSocketSession session, String[] parts) {

@@ -14,8 +14,12 @@ import java.util.List;
 @RequestMapping("gadgets")
 public class EndpointsController {
 
-    @Autowired
     IOTService iot;
+
+    @Autowired
+    public EndpointsController(IOTService iot){
+        this.iot = iot;
+    }
 
     final long MAX_WAIT = 500; //medio segundo
 
@@ -28,5 +32,12 @@ public class EndpointsController {
             time = System.nanoTime() - start;
         }
         return new ResponseEntity<List<Gadget>>(iot.getCurrentGadgets(), HttpStatus.OK);
+    }
+
+    @GetMapping("/current")
+    public ResponseEntity<List<Gadget>> getCurrentGadgets(){
+        ResponseEntity<List<Gadget>> re = new ResponseEntity<List<Gadget>>(iot.getCurrentGadgets(), HttpStatus.OK);
+        System.out.println(re);
+        return re;
     }
 }

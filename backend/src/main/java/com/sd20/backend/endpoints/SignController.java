@@ -20,8 +20,12 @@ import java.util.stream.Collectors;
 @RequestMapping("user")
 public class SignController {
 
-    @Autowired
     UserRepo userRepo;
+
+    @Autowired
+    public SignController(UserRepo ur){
+        this.userRepo = ur;
+    }
 
     @PostMapping("/signup")
     public void signup(@RequestBody User userIn){
@@ -30,6 +34,7 @@ public class SignController {
 
     @PostMapping("/signin")
     public ResponseEntity<User> signin(@RequestBody User userIn) {
+        System.out.println("ffff");
         User user = null;
         if ((user = userRepo.findByUserAndPassword(userIn.getUser(), userIn.getPassword())) == null) {
             System.out.println("hola");

@@ -1,7 +1,5 @@
 export class Dispositivo{
-  id: number;
-  name: string;
-  encendido: boolean;
-  conectado: boolean;
-  bgColor: any;
+  deviceName: string;
+  extensions: Map<string, string>;
+  ext: string[][];
 }

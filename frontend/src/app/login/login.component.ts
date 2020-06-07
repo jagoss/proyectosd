@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-	console.log("loegueo");
+	  console.log('loegueo');
     this.submitted = true;
     const val = this.form.value;
 

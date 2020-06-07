@@ -9,6 +9,13 @@ spring:
         dialect: org.hibernate.dialect.MySQL55Dialect
   datasource:
     url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/domoticasd?serverTimezone=UTC
-    username: root
-    password:
+    username: franri
+    password: root
     driverclassname: com.mysql.cj.jdbc.Driver
+
+#logging:
+#  level:
+#    org:
+#      springframework.web: trace
+#      apache: trace
+

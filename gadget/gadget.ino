@@ -25,7 +25,7 @@ const char* ssid     = "Colonia";
 const char* password = "48019530";
  
 char path[] = "/socket";
-char host[] = "192.168.0.107";
+char host[] = "192.168.0.101";
 
  
 WebSocketClient webSocketClient;
@@ -49,7 +49,7 @@ void setup() {
  
   delay(1000);
  
-  if (client.connect(host, 8080)) {
+  if (client.connect(host, 8081)) {
     Serial.println("Connected");
   } else {
     Serial.println("Connection failed.");
@@ -67,10 +67,11 @@ void setup() {
   }
  
 }
- int i = 0;
+
 void loop() {
   String data;
- 
+  int i = 0;
+  delay(1000);
   if (client.connected()) {
     
     webSocketClient.getData(data);
@@ -94,24 +95,30 @@ void loop() {
     } 
   }
   } 
-  delay(1000);
 }
 
 void handleData(String dataString, WebSocketClient wc){
+  Serial.println("adentro de handle data");
   char data[BUFF_SIZE];
   char* saveptr;
   dataString.toCharArray(data, BUFF_SIZE);
 
-  char ret[50];
+  char ret[50] = {0};
 
   char* iterator = strtok_r(data, DELIM, &saveptr);
   // iterator tendria el primer valor: INFO, STATUS u ORDER
   // caso INFO: devuelvo INFO;name;LIGHT
   if(strcmp(iterator,INFO) == 0){
+    Serial.println("adentro de info");
     strcat(ret, INFO);
     strcat(ret, DELIM);
+    strcat(ret, NAME);
+    strcat(ret, DELIM);
     strcat(ret, LIGHT);
+    Serial.println("antes de enviar");
+    Serial.println(ret);
     wc.sendData(ret);
+    Serial.println("despues de enviar");
     return;
   } else if(strcmp(iterator, STAT)==0){
     strcat(ret, STAT);
