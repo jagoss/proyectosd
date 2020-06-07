@@ -4,17 +4,17 @@ import com.sd20.backend.services.IOTService;
 import com.sd20.backend.utils.Gadget;
 import com.sd20.backend.utils.Request;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("gadgets")
 public class EndpointsController {
 
-    IOTService iot;
+    private final IOTService iot;
 
     @Autowired
     public EndpointsController(IOTService iot){
@@ -31,12 +31,12 @@ public class EndpointsController {
         while(iot.getLastRequestOfGadget(req.getDeviceName())!=null && time<MAX_WAIT){
             time = System.nanoTime() - start;
         }
-        return new ResponseEntity<List<Gadget>>(iot.getCurrentGadgets(), HttpStatus.OK);
+        return ResponseEntity.ok(iot.getCurrentGadgets());
     }
 
     @GetMapping("/current")
     public ResponseEntity<List<Gadget>> getCurrentGadgets(){
-        ResponseEntity<List<Gadget>> re = new ResponseEntity<List<Gadget>>(iot.getCurrentGadgets(), HttpStatus.OK);
+        ResponseEntity<List<Gadget>> re = ResponseEntity.ok(iot.getCurrentGadgets());
         System.out.println(re);
         return re;
     }

@@ -1,1 +1,43 @@
-<p>registro works!</p>
+<div class="col-md-6 offset-md-3 mt-5">
+  <mat-card>
+    <form [formGroup]="form" fxLayout="column"
+          fxLayoutAlign="center center">
+      <mat-card-header>
+        <mat-card-title>Sign Up</mat-card-title>
+      </mat-card-header>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput placeholder="User" formControlName="user">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password" formControlName="password"
+                 type="password">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput placeholder=" Confirm Password" formControlName="confirmPassword"
+                 type="password">
+          <mat-error *ngIf="passwordDistintas()">
+            Passwords doesn't match!
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <button *ngIf="!loading" mat-raised-button color="primary"
+                [disabled]="form.invalid || passwordDistintas()"
+                (click)="signUp()">
+          Sign Up
+        </button>
+        <mat-spinner *ngIf="loading"></mat-spinner>
+      </p>
+      <app-alert></app-alert>
+    </form>
+  </mat-card>
+</div>
+

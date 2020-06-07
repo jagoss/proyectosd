@@ -17,32 +17,32 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
-@RequestMapping("user")
+@RequestMapping("users")
 public class SignController {
 
-    UserRepo userRepo;
+    private final UserRepo userRepo;
 
     @Autowired
-    public SignController(UserRepo ur){
+    public SignController(UserRepo ur) {
         this.userRepo = ur;
     }
 
-    @PostMapping("/signup")
-    public void signup(@RequestBody User userIn){
-        // TODO hacer signup para nuevos usuarios, por ahora los metemos a mano
+    @PostMapping("/new")
+    public ResponseEntity<User> signup(@RequestBody User newUser) {
+        if (userRepo.findUserByUser(newUser.getUser()) != null)
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        User savedUser = userRepo.save(newUser);
+        return ResponseEntity.ok(savedUser);
     }
 
     @PostMapping("/signin")
     public ResponseEntity<User> signin(@RequestBody User userIn) {
-        System.out.println("ffff");
-        User user = null;
-        if ((user = userRepo.findByUserAndPassword(userIn.getUser(), userIn.getPassword())) == null) {
-            System.out.println("hola");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        User user = userRepo.findUserByUserAndPassword(userIn.getUser(), userIn.getPassword());
+        if (user == null)
+            return ResponseEntity.notFound().build();
         String token = getJWTToken(userIn.getUser());
         user.setToken(token);
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return ResponseEntity.ok(user);
     }
 
     private String getJWTToken(String username) {

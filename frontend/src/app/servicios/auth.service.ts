@@ -8,7 +8,8 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private urlLogin = 'http://localhost:8081/user/signin';
+  private urlLogIn = 'http://localhost:8081/users/signin';
+  private urlSignUp = 'http://localhost:8081/users/new';
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
@@ -21,8 +22,12 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  signUp(user: string, password: string) {
+    return this.http.post<User>(this.urlSignUp, {user, password})
+  }
+
   login(user: string, password: string) {
-    return this.http.post<User>(this.urlLogin, {user, password})
+    return this.http.post<User>(this.urlLogIn, {user, password})
       .pipe(map(user => {
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
