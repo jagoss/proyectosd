@@ -1,5 +1,5 @@
 export class Dispositivo{
-  deviceName: string;
+  name: string;
   extensions: Map<string, string>;
   ext: string[][];
 }

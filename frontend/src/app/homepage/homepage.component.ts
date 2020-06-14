@@ -58,8 +58,11 @@ export class HomepageComponent implements OnInit {
   }
 
   actualizarDispositivo(disp: Dispositivo, order: string) {
-    const req: Request = new Request(disp.deviceName, 'LIGHT', order);
-    this.dispositivoService.sendOrder(req).subscribe(lista => this.dispList = lista);
+    const req: Request = new Request(disp.name, 'LIGHT', order);
+    this.dispositivoService.sendOrder(req).subscribe(lista => {
+      console.log(lista);
+      this.dispList = lista;
+    });
 
     // if (dispSeleccionado.conectado) {
     //

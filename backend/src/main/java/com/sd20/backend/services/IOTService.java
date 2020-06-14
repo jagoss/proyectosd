@@ -48,7 +48,7 @@ public class IOTService {
 
     public void addData(WebSocketSession session, String[] parts) {
         Gadget g = gadgets.get(session.getId());
-        g.setName(parts[1]); sessionNameMap.put(session.getId(), parts[1]);
+        g.setName(parts[1]); sessionNameMap.put(parts[1], session.getId());
         for(int i=2; i<parts.length; i++){
             if (extensiones.contains(parts[i])){
                 g.addExtension(parts[i]);
@@ -59,6 +59,7 @@ public class IOTService {
 
     public boolean sendOrder(Request req) {
         System.out.println("sending order");
+        System.out.println("Request recibida: " + req);
         Gadget g = null;
         try{
             g = gadgets.get(sessionNameMap.get(req.getDeviceName()));
@@ -83,14 +84,16 @@ public class IOTService {
         System.out.println("receiving update");
         Gadget g = gadgets.get(session.getId());
         if (parts[1].equals(Consts.SUCCESS)) {
-            g.setSuccess(true); g.setLastRequest(null);
+            g.setSuccess(true); g.setEstadoExtension(); g.setLastRequest(null);
+
         } else {
             g.setSuccess(false); // el lastRequest ya quedó de la vez pasada
         }
     }
 
     public Request getLastRequestOfGadget(String deviceName){
-        Gadget g = gadgets.get(sessionNameMap.get(deviceName));
+        String s = sessionNameMap.get(deviceName);
+        Gadget g = gadgets.get(s);
         return g.getLastRequest();
 
     }

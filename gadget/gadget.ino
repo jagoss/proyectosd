@@ -25,13 +25,15 @@ const char* ssid     = "Colonia";
 const char* password = "48019530";
  
 char path[] = "/socket";
-char host[] = "192.168.0.101";
+char host[] = "192.168.0.107";
 
  
 WebSocketClient webSocketClient;
 WiFiClient client;
  
 void setup() {
+  pinMode(LED, OUTPUT);
+  
   Serial.begin(115200);
   delay(10);
   Serial.println("pepe");
@@ -99,6 +101,7 @@ void loop() {
 
 void handleData(String dataString, WebSocketClient wc){
   Serial.println("adentro de handle data");
+  Serial.println(dataString);
   char data[BUFF_SIZE];
   char* saveptr;
   dataString.toCharArray(data, BUFF_SIZE);
@@ -128,22 +131,31 @@ void handleData(String dataString, WebSocketClient wc){
     wc.sendData(ret);   
     return; 
   } else if (strcmp(iterator, ORDER)==0){
+    Serial.println("adentri de order");
     // el servidor manda ORDER;LIGHT;toggle/0/1
     if ((iterator=strtok_r(NULL, DELIM, &saveptr))!=NULL && strcmp(iterator,LIGHT)==0) {
+      Serial.println("adentri de light");
       // ahora leo que quiere hacer
+      Serial.println(iterator);
       if ((iterator=strtok_r(NULL, DELIM, &saveptr))!=NULL) {
-        if (strcmp(iterator, ON)) {
+        
+      Serial.println(iterator);
+        if (strcmp(iterator, ON)==0) {
           digitalWrite(LED, HIGH);
           wc.sendData(ORDER_SUCCESS);
           return;
-        } else if(strcmp(iterator, OFF)) {
+        } else if(strcmp(iterator, OFF)==0) {
           digitalWrite(LED, LOW);
           wc.sendData(ORDER_SUCCESS);
           return;
-        } else if(strcmp(iterator, TOGGLE)) {
+        } else if(strcmp(iterator, TOGGLE)==0) {
+          Serial.println("adentro de toggle");
+          Serial.println(digitalRead(LED));
           if(digitalRead(LED)==HIGH) {
+            Serial.println("apagando");
             digitalWrite(LED, LOW);
           } else {
+            Serial.println("prendiendo");
             digitalWrite(LED, HIGH);
           }
           wc.sendData(ORDER_SUCCESS);

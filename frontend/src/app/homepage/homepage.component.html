@@ -3,7 +3,7 @@
 
 <mat-action-list>
   <div *ngFor="let disp of dispList">
-    {{disp.deviceName}}
+
     <mat-list-item *ngFor="let ex of disp.ext" (click)="actualizarDispositivo(disp, 'TOGGLE')"
                    [routerLinkActive]="['is-active']"
                    [ngStyle]="{'background-color': ex[1]==='ON'?verdeHexa:carmesiHexa}">
@@ -11,6 +11,7 @@
           <mat-icon *ngIf="ex[1]==='ON'">mood</mat-icon>
           <mat-icon *ngIf="ex[1]==='OFF'">mood_bad</mat-icon>
       </div>
+      {{disp.name}}
     </mat-list-item>
   </div>
 </mat-action-list>

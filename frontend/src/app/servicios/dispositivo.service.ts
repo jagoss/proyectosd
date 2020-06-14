@@ -15,12 +15,27 @@ export class DispositivoService {
   constructor(private httpClient: HttpClient) { }
 
   sendOrder(req: Request): Observable<Dispositivo[]> {
-    return this.httpClient.patch<Dispositivo[]>(this.sendOrderUrl, req);
+    const token = JSON.parse(localStorage.getItem('currentUser')).token;
+    console.log(req);
+    return this.httpClient.post<Dispositivo[]>(this.sendOrderUrl, req, {
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'DELETE, POST, GET, PATCH, OPTIONS',
+      }
+    });
   }
 
   getCurrentGadgets(): Observable<Dispositivo[]>{
     console.log('adentro de getcurrentgadgets');
-    return this.httpClient.get<Dispositivo[]>(this.getCurrentUrl);
+    const token = JSON.parse(localStorage.getItem('currentUser')).token;
+    console.log(token);
+    return this.httpClient.get<Dispositivo[]>(this.getCurrentUrl, {
+      headers: {
+        Authorization: token
+      }
+    });
   }
 
   // actualizarDispositivo(id: number) {

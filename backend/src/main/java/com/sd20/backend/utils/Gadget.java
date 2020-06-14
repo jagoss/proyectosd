@@ -102,4 +102,9 @@ public class Gadget {
         return a;
     }
 
+    public void setEstadoExtension(){
+        String s = extensiones.get("LIGHT").equals("ON") ? "OFF" : "ON";
+        extensiones.put("LIGHT", s);
+    }
+
 }

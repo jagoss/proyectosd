@@ -16,4 +16,8 @@ public class Request {
     public String getExtension() {
         return extension;
     }
+
+    public String getValue() {
+        return value;
+    }
 }
